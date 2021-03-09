@@ -12,5 +12,5 @@ struct Card: Identifiable {
     var id = UUID().uuidString
     var cardColor: Color
     var offSet: CGFloat = 0
-    var title: String?
+    var title: String
 }

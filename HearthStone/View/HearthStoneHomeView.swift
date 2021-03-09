@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+//width
+var width = UIScreen.main.bounds.width
+
 struct HearthStoneHomeView: View {
     @EnvironmentObject var model: HearthStoneCarouselViewModel
     var body: some View {
@@ -27,11 +30,100 @@ struct HearthStoneHomeView: View {
             .padding()
             
             //Carousel
-            ZStack{
-                
+            ZStack {
+                ForEach(model.hearthStoneCarouselViewModelCards.indices.reversed(), id:\.self) {index in
+                    HStack {
+                        model.hearthStoneCarouselViewModelCards[index].cardColor
+                            .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))
+                            .cornerRadius(18)
+                            .offset(x: getCardOffSet(index: index))
+                            .rotationEffect(.init(degrees: getCardRotation(index: index)))
+                        
+                        Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
+                    }
+                    .frame(height: 460)
+                    .contentShape(Rectangle())
+                    .offset(x: model.hearthStoneCarouselViewModelCards[index].offSet)
+                    .gesture(DragGesture(minimumDistance: 0).onChanged({(value) in
+                        dragGestureOnChange(value: value, index: index)
+                    }).onEnded({(value) in
+                        dragGestureOnEnd(value: value, index: index)
+                    }))
+                    
+                }
             }
+            .padding(.top, 25)
+            .padding(.horizontal, 30)//based on the func getCardWeight() boxWidth
+            
+            Button(action: ResetViews, label: {
+                Image(systemName: "arrow.left")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding()
+                    .clipShape(Rectangle())
+                    .frame(width: 150)
+                    .background(Color.purple)
+                    .cornerRadius(8)
+                    .shadow(radius: 6)
+            }).padding(.top, 35)
+            
             Spacer()
         }
+    }
+    
+    //Reset Views
+    func ResetViews() {
+        for index in model.hearthStoneCarouselViewModelCards.indices {
+            withAnimation(.spring()) {
+                model.hearthStoneCarouselViewModelCards[index].offSet = 0
+                model.swipedCard = 0
+            }
+        }
+    }
+    
+    //get rotation when card is being swiped
+    func getCardRotation(index: Int) -> Double {
+        let boxWidth = Double(width / 3)
+        let offSet = Double(model.hearthStoneCarouselViewModelCards[index].offSet)
+        let angle: Double = 8
+        return (offSet / boxWidth) * angle
+    }
+    
+    func dragGestureOnChange(value: DragGesture.Value, index: Int) {
+        //only left swipe
+        if value.translation.width < 0 {
+            model.hearthStoneCarouselViewModelCards[index].offSet = value.translation.width
+        }
+    }
+    
+    func dragGestureOnEnd(value: DragGesture.Value, index: Int) {
+        withAnimation{
+            if -value.translation.width > width / 3{
+                model.hearthStoneCarouselViewModelCards[index].offSet = -width
+                model.swipedCard += 1
+            } else {
+                model.hearthStoneCarouselViewModelCards[index].offSet = 0
+            }
+        }
+    }
+    
+    //func to get width & height for card
+    func getCardHeight(index: Int) -> CGFloat {
+        let height: CGFloat = 460
+        //again first several(3) cards
+        let cardHeight = index - model.swipedCard <= 2 ? CGFloat(index - model.swipedCard) * 35 : 70
+        return height - cardHeight
+    }
+    
+    func getCardWidth(index: Int) -> CGFloat {
+        let boxWidth = UIScreen.main.bounds.width - 60 - 60
+        //for first several(3) cards
+        //let cardWidth = index <= 2 ? CGFloat(index) * 30 : 60
+        return boxWidth
+    }
+    //func to get OffSet
+    func getCardOffSet(index: Int) -> CGFloat {
+        return index - model.swipedCard <= 2 ? CGFloat(index - model.swipedCard) * 30 : 60
     }
 }
 
