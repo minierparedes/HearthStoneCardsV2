@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var cardSearch: String = ""
+    @StateObject var homeModel = HearthStoneCarouselViewModel()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+       HearthStoneHomeView()
+        .environmentObject(homeModel)
     }
 }
 

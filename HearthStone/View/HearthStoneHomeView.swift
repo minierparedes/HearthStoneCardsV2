@@ -8,13 +8,35 @@
 import SwiftUI
 
 struct HearthStoneHomeView: View {
+    @EnvironmentObject var model: HearthStoneCarouselViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            HStack {
+                Button(action: {}, label: {
+                    Image(systemName: "xmark")
+                        .font(.title2)
+                        .foregroundColor(.gray)
+                })
+                Text("HearthStone Cards")
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .padding(.leading)
+                
+                Spacer()
+            }
+            .padding()
+            
+            //Carousel
+            ZStack{
+                
+            }
+            Spacer()
+        }
     }
 }
 
 struct HearthStoneHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HearthStoneHomeView()
+        ContentView()
     }
 }
