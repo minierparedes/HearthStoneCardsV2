@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var cardSearch: String = ""
     var body: some View {
         Text("Hello, world!")
             .padding()

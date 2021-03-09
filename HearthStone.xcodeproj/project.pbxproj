@@ -11,6 +11,11 @@
 		8DEEE88325F718F8008AF8DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE88225F718F8008AF8DF /* ContentView.swift */; };
 		8DEEE88525F718FA008AF8DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEEE88425F718FA008AF8DF /* Assets.xcassets */; };
 		8DEEE88825F718FA008AF8DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEEE88725F718FA008AF8DF /* Preview Assets.xcassets */; };
+		8DEEE89125F71951008AF8DF /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE89025F71951008AF8DF /* APIService.swift */; };
+		8DEEE89425F7199D008AF8DF /* HearthStoneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE89325F7199D008AF8DF /* HearthStoneCard.swift */; };
+		8DEEE8A525F71C71008AF8DF /* HearthStoneCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE8A425F71C71008AF8DF /* HearthStoneCardCellView.swift */; };
+		8DEEE8A925F757E7008AF8DF /* HearthStoneCardexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE8A825F757E7008AF8DF /* HearthStoneCardexView.swift */; };
+		8DEEE8AC25F75D80008AF8DF /* HearthStoneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE8AB25F75D80008AF8DF /* HearthStoneHomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +25,11 @@
 		8DEEE88425F718FA008AF8DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DEEE88725F718FA008AF8DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8DEEE88925F718FA008AF8DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DEEE89025F71951008AF8DF /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		8DEEE89325F7199D008AF8DF /* HearthStoneCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneCard.swift; sourceTree = "<group>"; };
+		8DEEE8A425F71C71008AF8DF /* HearthStoneCardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneCardCellView.swift; sourceTree = "<group>"; };
+		8DEEE8A825F757E7008AF8DF /* HearthStoneCardexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneCardexView.swift; sourceTree = "<group>"; };
+		8DEEE8AB25F75D80008AF8DF /* HearthStoneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneHomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +62,12 @@
 		8DEEE87F25F718F8008AF8DF /* HearthStone */ = {
 			isa = PBXGroup;
 			children = (
+				8DEEE89D25F71BC1008AF8DF /* Model */,
+				8DEEE89C25F71BB0008AF8DF /* View */,
+				8DEEE89B25F71B9F008AF8DF /* ViewModel */,
 				8DEEE88025F718F8008AF8DF /* HearthStoneApp.swift */,
 				8DEEE88225F718F8008AF8DF /* ContentView.swift */,
+				8DEEE89025F71951008AF8DF /* APIService.swift */,
 				8DEEE88425F718FA008AF8DF /* Assets.xcassets */,
 				8DEEE88925F718FA008AF8DF /* Info.plist */,
 				8DEEE88625F718FA008AF8DF /* Preview Content */,
@@ -67,6 +81,31 @@
 				8DEEE88725F718FA008AF8DF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8DEEE89B25F71B9F008AF8DF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8DEEE89C25F71BB0008AF8DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8DEEE8A425F71C71008AF8DF /* HearthStoneCardCellView.swift */,
+				8DEEE8A825F757E7008AF8DF /* HearthStoneCardexView.swift */,
+				8DEEE8AB25F75D80008AF8DF /* HearthStoneHomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8DEEE89D25F71BC1008AF8DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DEEE89325F7199D008AF8DF /* HearthStoneCard.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +177,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DEEE8AC25F75D80008AF8DF /* HearthStoneHomeView.swift in Sources */,
 				8DEEE88325F718F8008AF8DF /* ContentView.swift in Sources */,
+				8DEEE8A925F757E7008AF8DF /* HearthStoneCardexView.swift in Sources */,
+				8DEEE89125F71951008AF8DF /* APIService.swift in Sources */,
 				8DEEE88125F718F8008AF8DF /* HearthStoneApp.swift in Sources */,
+				8DEEE89425F7199D008AF8DF /* HearthStoneCard.swift in Sources */,
+				8DEEE8A525F71C71008AF8DF /* HearthStoneCardCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
