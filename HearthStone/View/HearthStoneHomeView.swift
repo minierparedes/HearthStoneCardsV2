@@ -33,7 +33,7 @@ struct HearthStoneHomeView: View {
 
             //Carousel
             ZStack {
-                ForEach(hsCarouselLVM.hsCards.indices.prefix(3), id: \.self) {index in
+                ForEach(hsCarouselLVM.hsCards.indices.prefix(3).reversed(), id: \.self) {index in
                     HStack {
                         HearthStoneCardView(hearthStoneCard: hsCarouselLVM.hsCards[index])
                             .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))

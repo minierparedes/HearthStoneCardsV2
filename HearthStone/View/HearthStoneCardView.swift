@@ -21,11 +21,17 @@ struct HearthStoneCardView: View {
                 .padding()
                 .padding(.top, 10)
             Text(hearthStoneCard.text)//populate items with data model each element
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: 250, alignment: .leading)
+                .padding()
+            
             
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
+        .background(Color(hsCarouselLVM.backgroundColor(forType: hearthStoneCard.type)))
         .cornerRadius(18)
     }
 }
