@@ -13,6 +13,7 @@ class HearthStoneCarouselViewModel: ObservableObject {
     @Published var offSet: CGFloat = 0
     @Published var swipedCard = 0
     @Published private var cardSearch: String = ""
+    @Published var cardColor: Color = .purple
     
     func getJSON() {
         let apiService = APIService.shared
@@ -35,22 +36,22 @@ class HearthStoneCarouselViewModel: ObservableObject {
     }
     
     
-    @Published var hearthStoneCarouselViewModelCards = [
-        Card(cardColor: Color.blue, title: "HearthStoneCard.name"),
-        Card(cardColor: Color.purple, title: "HearthStoneCard.name"),
-        Card(cardColor: Color.pink, title: "HearthStoneCard.name"),
-        Card(cardColor: Color.yellow, title: "HearthStoneCard.name"),
-        Card(cardColor: Color.orange, title: "HearthStoneCard.name")
-    ]
+//    @Published var hearthStoneCarouselViewModelCards = [
+//        Card(cardColor: Color.blue, title: "HearthStoneCard.name"),
+//        Card(cardColor: Color.purple, title: "HearthStoneCard.name"),
+//        Card(cardColor: Color.pink, title: "HearthStoneCard.name"),
+//        Card(cardColor: Color.yellow, title: "HearthStoneCard.name"),
+//        Card(cardColor: Color.orange, title: "HearthStoneCard.name")
+//    ]
 
-    func cardColor(forType type: String) -> UIColor {
-        switch type {
-        case "hero": return .systemGray6
-        case "minion": return .systemGreen
-        case "spell": return .systemOrange
-        case "weapon": return .systemGray
-        default: return .systemPurple
-                
-        }
-    }
+//    func cardColor(forType type: String) -> UIColor {
+//        switch type {
+//        case "hero": return .systemGray6
+//        case "minion": return .systemGreen
+//        case "spell": return .systemOrange
+//        case "weapon": return .systemGray
+//        default: return .systemPurple
+//                
+//        }
+//    }
 }

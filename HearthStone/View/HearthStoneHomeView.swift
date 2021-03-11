@@ -11,12 +11,13 @@ import SwiftUI
 var width = UIScreen.main.bounds.width
 
 struct HearthStoneHomeView: View {
-//    @ObservedObject var model = HearthStoneCarouselViewModel()
-   // @StateObject var hsCarouselLVM = HearthStoneCarouselViewModel()
+    @EnvironmentObject var hsCarouselLVM: HearthStoneCarouselViewModel
     var body: some View {
         VStack{
             HStack {
-                Button(action: {}, label: {
+                Button(action: {
+                    hsCarouselLVM.getJSON()
+                }, label: {
                     Image(systemName: "xmark")
                         .font(.title2)
                         .foregroundColor(.gray)
@@ -32,9 +33,9 @@ struct HearthStoneHomeView: View {
 
             //Carousel
             ZStack {
-                ForEach(model.hearthStoneCard) {index in
+                ForEach(hsCarouselLVM.hsCards.indices.prefix(3), id: \.self) {index in
                     HStack {
-                        HearthStoneCardView(hearthStoneCard: model.hearthStoneCard)
+                        HearthStoneCardView(hearthStoneCard: hsCarouselLVM.hsCards[index])
                             .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))
                             .offset(x: getCardOffSet(index: index))
                             .rotationEffect(.init(degrees: getCardRotation(index: index)))
@@ -43,7 +44,7 @@ struct HearthStoneHomeView: View {
                     }
                     .frame(height: 460)
                     .contentShape(Rectangle())
-                    .offset(x: model.hearthStoneCarouselViewModelCards[index].offSet)
+                    .offset(x: hsCarouselLVM.offSet)
                     .gesture(DragGesture(minimumDistance: 0).onChanged({(value) in
                         dragGestureOnChange(value: value, index: index)
                     }).onEnded({(value) in
@@ -73,10 +74,10 @@ struct HearthStoneHomeView: View {
 
     //Reset Views
     func ResetViews() {
-        for index in model.hearthStoneCarouselViewModelCards.indices {
+        for index in hsCarouselLVM.hsCards.indices {
             withAnimation(.spring()) {
-                model.hearthStoneCarouselViewModelCards[index].offSet = 0
-                model.swipedCard = 0
+                hsCarouselLVM.offSet = 0
+                hsCarouselLVM.swipedCard = 0
             }
         }
     }
@@ -84,7 +85,7 @@ struct HearthStoneHomeView: View {
     //get rotation when card is being swiped
     func getCardRotation(index: Int) -> Double {
         let boxWidth = Double(width / 3)
-        let offSet = Double(model.hearthStoneCarouselViewModelCards[index].offSet)
+        let offSet = Double(hsCarouselLVM.offSet)
         let angle: Double = 8
         return (offSet / boxWidth) * angle
     }
@@ -92,17 +93,17 @@ struct HearthStoneHomeView: View {
     func dragGestureOnChange(value: DragGesture.Value, index: Int) {
         //only left swipe
         if value.translation.width < 0 {
-            model.hearthStoneCarouselViewModelCards[index].offSet = value.translation.width
+            hsCarouselLVM.offSet = value.translation.width
         }
     }
 
     func dragGestureOnEnd(value: DragGesture.Value, index: Int) {
         withAnimation{
             if -value.translation.width > width / 3{
-                model.hearthStoneCarouselViewModelCards[index].offSet = -width
-                model.swipedCard += 1
+                hsCarouselLVM.offSet = -width
+                hsCarouselLVM.swipedCard += 1
             } else {
-                model.hearthStoneCarouselViewModelCards[index].offSet = 0
+                hsCarouselLVM.offSet = 0
             }
         }
     }
@@ -111,7 +112,7 @@ struct HearthStoneHomeView: View {
     func getCardHeight(index: Int) -> CGFloat {
         let height: CGFloat = 460
         //again first several(3) cards
-        let cardHeight = index - model.swipedCard <= 2 ? CGFloat(index - model.swipedCard) * 35 : 70
+        let cardHeight = index - hsCarouselLVM.swipedCard <= 2 ? CGFloat(index - hsCarouselLVM.swipedCard) * 35 : 70
         return height - cardHeight
     }
 
@@ -123,7 +124,7 @@ struct HearthStoneHomeView: View {
     }
     //func to get OffSet
     func getCardOffSet(index: Int) -> CGFloat {
-        return index - model.swipedCard <= 2 ? CGFloat(index - model.swipedCard) * 30 : 60
+        return index - hsCarouselLVM.swipedCard <= 2 ? CGFloat(index - hsCarouselLVM.swipedCard) * 30 : 60
     }
 }
 
