@@ -11,7 +11,8 @@ import SwiftUI
 var width = UIScreen.main.bounds.width
 
 struct HearthStoneHomeView: View {
-    @EnvironmentObject var model: HearthStoneCarouselViewModel
+//    @ObservedObject var model = HearthStoneCarouselViewModel()
+   // @StateObject var hsCarouselLVM = HearthStoneCarouselViewModel()
     var body: some View {
         VStack{
             HStack {
@@ -24,21 +25,20 @@ struct HearthStoneHomeView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .padding(.leading)
-                
+
                 Spacer()
             }
             .padding()
-            
+
             //Carousel
             ZStack {
-                ForEach(model.hearthStoneCarouselViewModelCards.indices.reversed(), id:\.self) {index in
+                ForEach(model.hearthStoneCard) {index in
                     HStack {
-                        model.hearthStoneCarouselViewModelCards[index].cardColor
+                        HearthStoneCardView(hearthStoneCard: model.hearthStoneCard)
                             .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))
-                            .cornerRadius(18)
                             .offset(x: getCardOffSet(index: index))
                             .rotationEffect(.init(degrees: getCardRotation(index: index)))
-                        
+
                         Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
                     }
                     .frame(height: 460)
@@ -49,12 +49,12 @@ struct HearthStoneHomeView: View {
                     }).onEnded({(value) in
                         dragGestureOnEnd(value: value, index: index)
                     }))
-                    
+
                 }
             }
             .padding(.top, 25)
             .padding(.horizontal, 30)//based on the func getCardWeight() boxWidth
-            
+
             Button(action: ResetViews, label: {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 20, weight: .bold))
@@ -66,11 +66,11 @@ struct HearthStoneHomeView: View {
                     .cornerRadius(8)
                     .shadow(radius: 6)
             }).padding(.top, 35)
-            
+
             Spacer()
         }
     }
-    
+
     //Reset Views
     func ResetViews() {
         for index in model.hearthStoneCarouselViewModelCards.indices {
@@ -80,7 +80,7 @@ struct HearthStoneHomeView: View {
             }
         }
     }
-    
+
     //get rotation when card is being swiped
     func getCardRotation(index: Int) -> Double {
         let boxWidth = Double(width / 3)
@@ -88,14 +88,14 @@ struct HearthStoneHomeView: View {
         let angle: Double = 8
         return (offSet / boxWidth) * angle
     }
-    
+
     func dragGestureOnChange(value: DragGesture.Value, index: Int) {
         //only left swipe
         if value.translation.width < 0 {
             model.hearthStoneCarouselViewModelCards[index].offSet = value.translation.width
         }
     }
-    
+
     func dragGestureOnEnd(value: DragGesture.Value, index: Int) {
         withAnimation{
             if -value.translation.width > width / 3{
@@ -106,7 +106,7 @@ struct HearthStoneHomeView: View {
             }
         }
     }
-    
+
     //func to get width & height for card
     func getCardHeight(index: Int) -> CGFloat {
         let height: CGFloat = 460
@@ -114,7 +114,7 @@ struct HearthStoneHomeView: View {
         let cardHeight = index - model.swipedCard <= 2 ? CGFloat(index - model.swipedCard) * 35 : 70
         return height - cardHeight
     }
-    
+
     func getCardWidth(index: Int) -> CGFloat {
         let boxWidth = UIScreen.main.bounds.width - 60 - 60
         //for first several(3) cards

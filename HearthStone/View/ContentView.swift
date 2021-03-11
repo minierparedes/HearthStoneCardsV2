@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var cardSearch: String = ""
-    @StateObject var homeModel = HearthStoneCarouselViewModel()
+//    @StateObject var hsCarouselLVM = HearthStoneCarouselViewModel()
+    @StateObject var hsCarouselLVM = HearthStoneCarouselViewModel()
+    @State var items = Array(repeating: GridItem(spacing: 15), count: 15)
     var body: some View {
-       HearthStoneHomeView()
-        .environmentObject(homeModel)
+//       HearthStoneHomeView()
+//        .environmentObject(homeModel)
+        ScrollView {
+            LazyVGrid(columns: items, spacing: 15) {
+                ForEach(hsCarouselLVM.hsCards, id: \.id) { card in
+                    HearthStoneCardView(hearthStoneCard: card, items: $items)
+                    
+                }
+            }
+        }
+        
+        Text("hello world")
+        Button {
+            hsCarouselLVM.getJSON()
+        } label: {
+            Text("Fetch Data")
+        }
     }
 }
 

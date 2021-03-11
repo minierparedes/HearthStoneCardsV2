@@ -14,7 +14,7 @@ struct HearthStoneCardexView: View {
             ScrollView {
                 LazyVGrid(columns: gridItems, content: {
                     ForEach(0..<15) { _ in
-                        HearthStoneCardCellView()
+                        HearthStoneCardCellView()//this is where to bring in the constructed card view
                     }
                 })
             }

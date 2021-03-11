@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D78475C25F85571006A8C71 /* HearthStoneListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D78475B25F85571006A8C71 /* HearthStoneListViewModel.swift */; };
 		8DEEE88125F718F8008AF8DF /* HearthStoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE88025F718F8008AF8DF /* HearthStoneApp.swift */; };
 		8DEEE88325F718F8008AF8DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE88225F718F8008AF8DF /* ContentView.swift */; };
 		8DEEE88525F718FA008AF8DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEEE88425F718FA008AF8DF /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D78475B25F85571006A8C71 /* HearthStoneListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneListViewModel.swift; sourceTree = "<group>"; };
 		8DEEE87D25F718F8008AF8DF /* HearthStone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearthStone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DEEE88025F718F8008AF8DF /* HearthStoneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneApp.swift; sourceTree = "<group>"; };
 		8DEEE88225F718F8008AF8DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				8DEEE8B325F7622B008AF8DF /* HearthStoneCarouselViewModel.swift */,
+				8D78475B25F85571006A8C71 /* HearthStoneListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				8DEEE8A925F757E7008AF8DF /* HearthStoneCardexView.swift in Sources */,
 				8DEEE89125F71951008AF8DF /* APIService.swift in Sources */,
 				8DEEE8B425F7622B008AF8DF /* HearthStoneCarouselViewModel.swift in Sources */,
+				8D78475C25F85571006A8C71 /* HearthStoneListViewModel.swift in Sources */,
 				8DEEE88125F718F8008AF8DF /* HearthStoneApp.swift in Sources */,
 				8DEEE89425F7199D008AF8DF /* HearthStoneCard.swift in Sources */,
 				8DEEE8A525F71C71008AF8DF /* HearthStoneCardCellView.swift in Sources */,
