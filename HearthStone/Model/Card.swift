@@ -8,9 +8,10 @@
 import SwiftUI
 
 
-struct Card: Identifiable {
+struct Card:Identifiable {
     var id = UUID().uuidString
-    var cardColor: Color
     var offSet: CGFloat = 0
-    var title: String
+    var name: String
+    var artist: String
+    var img: URL
 }

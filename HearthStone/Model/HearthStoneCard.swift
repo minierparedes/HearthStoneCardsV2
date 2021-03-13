@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct HearthStoneCard: Codable {
-
+struct HearthStoneCard: Codable, Equatable, Identifiable {
+        //let cardID: UUID
         let artist : String
         let attack : Int
         let cardClass : String
@@ -30,6 +30,7 @@ struct HearthStoneCard: Codable {
         let type : String
 
         enum CodingKeys: String, CodingKey {
+                //case cardID = "cardID"
                 case artist = "artist"
                 case attack = "attack"
                 case cardClass = "cardClass"
@@ -52,6 +53,7 @@ struct HearthStoneCard: Codable {
     
     init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
+            //cardID = try values.decodeIfPresent(UUID.self, forKey: .cardID) ??
             artist = try values.decodeIfPresent(String.self, forKey: .artist) ?? ""
             attack = try values.decodeIfPresent(Int.self, forKey: .attack) ?? 0
             cardClass = try values.decodeIfPresent(String.self, forKey: .cardClass) ?? ""
@@ -76,8 +78,6 @@ struct HearthStoneCard: Codable {
         let urlString = "https://art.hearthstonejson.com/v1/256x/\(id).jpg"
         return URL(string: urlString)!
     }
-
 }
-
 
 
