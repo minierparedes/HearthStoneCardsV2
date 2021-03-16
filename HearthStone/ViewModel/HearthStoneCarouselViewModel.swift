@@ -74,7 +74,6 @@ class HearthStoneCarouselViewModel: ObservableObject {
                     self.hsCards = hearthStoneCardData
                     for card in hearthStoneCardData.prefix(10000) {
                         if card.type == "HERO" {
-                            self.cards.append(Card(name: card.name, artist: card.artist, img: card.cardImageURL, type: card.type))
                             print("Hero name: \(card.set) ", "card id: \(card.id)")
                         }
                     }

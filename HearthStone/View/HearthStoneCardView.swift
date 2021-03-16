@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HearthStoneCardView: View {
     @EnvironmentObject var hsCarouselLVM: HearthStoneCarouselViewModel
-    var card: Card//COrrect
-    //@Binding var items: [GridItem]
+    var card: HearthStoneCard
     
     var body: some View {
         VStack {

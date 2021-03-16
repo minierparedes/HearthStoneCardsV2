@@ -44,9 +44,9 @@ struct HearthStoneHomeView: View {
 
             //Carousel
             ZStack {
-                ForEach(hsCarouselLVM.cards.indices.prefix(11).reversed(), id: \.self) {index in
+                ForEach(hsCarouselLVM.hsCards.indices.prefix(11).reversed(), id: \.self) {index in
                     HStack {
-                        HearthStoneCardView(card: hsCarouselLVM.cards[index])
+                        HearthStoneCardView(card: hsCarouselLVM.hsCards[index])
                             .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))
                             .offset(x: getCardOffSet(index: index))
                             .rotationEffect(.init(degrees: getCardRotation(index: index)))
@@ -55,7 +55,7 @@ struct HearthStoneHomeView: View {
                     }
                     .frame(height: 460)
                     .contentShape(Rectangle())
-                    .offset(x: hsCarouselLVM.cards[index].offSet)
+                    .offset(x: hsCarouselLVM.hsCards[index].offSet)
                     .gesture(DragGesture(minimumDistance: 0).onChanged({(value) in
                         dragGestureOnChange(value: value, index: index)
                     }).onEnded({(value) in
@@ -85,9 +85,9 @@ struct HearthStoneHomeView: View {
 
     //Reset Views
     func ResetViews() {
-        for index in hsCarouselLVM.cards.indices {
+        for index in hsCarouselLVM.hsCards.indices {
             withAnimation(.spring()) {
-                hsCarouselLVM.cards[index].offSet = 0
+                hsCarouselLVM.hsCards[index].offSet = 0
                 hsCarouselLVM.swipedCard = 0
             }
         }
@@ -96,7 +96,7 @@ struct HearthStoneHomeView: View {
     //get rotation when card is being swiped
     func getCardRotation(index: Int) -> Double {
         let boxWidth = Double(width / 3)
-        let offSet = Double(hsCarouselLVM.cards[index].offSet)
+        let offSet = Double(hsCarouselLVM.hsCards[index].offSet)
         let angle: Double = 8
         return (offSet / boxWidth) * angle
     }
@@ -104,17 +104,17 @@ struct HearthStoneHomeView: View {
     func dragGestureOnChange(value: DragGesture.Value, index: Int) {
         //only left swipe
         if value.translation.width < 0 {
-            hsCarouselLVM.cards[index].offSet = value.translation.width
+            hsCarouselLVM.hsCards[index].offSet = value.translation.width
         }
     }
 
     func dragGestureOnEnd(value: DragGesture.Value, index: Int) {
         withAnimation{
             if -value.translation.width > width / 3{
-                hsCarouselLVM.cards[index].offSet = -width
+                hsCarouselLVM.hsCards[index].offSet = -width
                 hsCarouselLVM.swipedCard += 1
             } else {
-                hsCarouselLVM.cards[index].offSet = 0
+                hsCarouselLVM.hsCards[index].offSet = 0
             }
         }
     }
