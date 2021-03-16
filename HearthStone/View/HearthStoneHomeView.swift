@@ -12,10 +12,11 @@ var width = UIScreen.main.bounds.width
 
 struct HearthStoneHomeView: View {
     @EnvironmentObject var hsCarouselLVM: HearthStoneCarouselViewModel
+//    var cards: Card
 //    var hearthStoneCardView: [HearthStoneCardView] = {
 //        var views = [HearthStoneCardView]()
-//        for index in 0..<5 {
-//            views.append(HearthStoneCardView(hearthStoneCard: hsCarouselLVM.hsCards[index]))
+//        for card in cards.array {
+//            views.append(HearthStoneCardView(card: card))
 //        }
 //        return views
 //    }()
@@ -32,7 +33,7 @@ struct HearthStoneHomeView: View {
                         .font(.title2)
                         .foregroundColor(.gray)
                 })
-                Text("HearthStone Cards")
+                Text("Featured")
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .padding(.leading)
@@ -43,7 +44,7 @@ struct HearthStoneHomeView: View {
 
             //Carousel
             ZStack {
-                ForEach(hsCarouselLVM.cards.indices.prefix(3).reversed(), id: \.self) {index in
+                ForEach(hsCarouselLVM.cards.indices.prefix(11).reversed(), id: \.self) {index in
                     HStack {
                         HearthStoneCardView(card: hsCarouselLVM.cards[index])
                             .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))

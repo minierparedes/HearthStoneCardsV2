@@ -29,15 +29,38 @@ class HearthStoneCarouselViewModel: ObservableObject {
         let offset = deckPosition * -10
         return CGFloat(offset)
     }
+    
+    func gradientColors(forType type1: String, forType type2: String) -> LinearGradient {
+       return LinearGradient(gradient: Gradient(colors: [Color("\(type1)"), Color("\(type2)")]), startPoint: .top, endPoint: .bottom)
+    }
 
-    func backgroundColor(forType type: String) -> UIColor {
+    func backgroundColor(forType type: String) -> Gradient {
+        let deathKnightGradientColor = Gradient(colors: [Color.cardClassDeathKnightDark, Color.cardClassDeathKnightLight])
+        let demonHunterGradientColor = Gradient(colors: [Color.cardClassDemonHunterDark, Color.cardClassDemonHunterLight])
+        let druidGradientColor = Gradient(colors: [Color.cardClassDruidDark, Color.cardClassDruidLight])
+        let hunterGradientColor = Gradient(colors: [Color.cardClassHunterDark, Color.cardClassHunterLight])
+        let mageGradientColor = Gradient(colors: [Color.cardClassMageDark, Color.cardClassMageLight])
+        let paladinGradientColor = Gradient(colors: [Color.cardClassPaladinDark, Color.cardClassPaladinLight])
+        let priestGradientColor = Gradient(colors: [Color.cardClassPriestDark, Color.cardClassPriestLight])
+        let rogueGradientColor = Gradient(colors: [Color.cardClassRogueDark, Color.cardClassRogueLight])
+        let shamanGradientColor = Gradient(colors: [Color.cardClassShamanDark, Color.cardClassShamanLight])
+        let warlockGradientColor = Gradient(colors: [Color.cardClassWarlockDark, Color.cardClassWarlockLight])
+        let warriorGradientColor = Gradient(colors: [Color.cardClassWarriorDark, Color.cardClassWarriorLight])
+        let neutralGradientColor = Gradient(colors: [Color.cardClassNeutralDark, Color.cardClassNeutralLight])
+        
         switch type {
-        case "HERO_POWER": return .systemGray6
-        case "MINION": return .systemGreen
-        case "SPELL": return .systemOrange
-        case "WEAPON": return .systemGray
-        case "ENCHANTMENT": return .systemPurple
-        default: return .systemTeal
+        case "DEATHKNIGHT": return deathKnightGradientColor
+        case "DEMONHUNTER": return demonHunterGradientColor
+        case "DRUID": return druidGradientColor
+        case "HUNTER": return hunterGradientColor
+        case "MAGE": return mageGradientColor
+        case "PALADIN": return paladinGradientColor
+        case "PRIEST": return priestGradientColor
+        case "ROGUE": return rogueGradientColor
+        case "SHAMAN": return shamanGradientColor
+        case "WARLOCK": return warlockGradientColor
+        case "WARRIOR": return warriorGradientColor
+        default: return neutralGradientColor
                 
         }
     }
@@ -49,9 +72,11 @@ class HearthStoneCarouselViewModel: ObservableObject {
             case .success(let hearthStoneCardData):
                 DispatchQueue.main.async {
                     self.hsCards = hearthStoneCardData
-                    for card in hearthStoneCardData {
-                        self.cards.append(Card(name: card.name, artist: card.artist, img: card.cardImageURL))
-                        print(self.cards)
+                    for card in hearthStoneCardData.prefix(10000) {
+                        if card.type == "HERO" {
+                            self.cards.append(Card(name: card.name, artist: card.artist, img: card.cardImageURL, type: card.type))
+                            print("Hero name: \(card.set) ", "card id: \(card.id)")
+                        }
                     }
                 }
             case .failure(let apiError):

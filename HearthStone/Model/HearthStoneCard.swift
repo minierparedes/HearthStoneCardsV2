@@ -5,11 +5,13 @@
 //  Created by ethancr0wn on 2021/03/09.
 //
 
+
+import CoreGraphics
 import Foundation
 
 
-struct HearthStoneCard: Codable, Equatable, Identifiable {
-        //let cardID: UUID
+struct HearthStoneCard: Codable {
+        
         let artist : String
         let attack : Int
         let cardClass : String
@@ -78,6 +80,7 @@ struct HearthStoneCard: Codable, Equatable, Identifiable {
         let urlString = "https://art.hearthstonejson.com/v1/256x/\(id).jpg"
         return URL(string: urlString)!
     }
+    var offset: CGFloat = 0
 }
 
 

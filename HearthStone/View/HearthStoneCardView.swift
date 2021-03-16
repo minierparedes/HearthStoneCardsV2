@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct HearthStoneCardView: View, Identifiable {
-    let id = UUID()
+struct HearthStoneCardView: View {
     @EnvironmentObject var hsCarouselLVM: HearthStoneCarouselViewModel
     var card: Card//COrrect
     //@Binding var items: [GridItem]
@@ -21,7 +20,7 @@ struct HearthStoneCardView: View, Identifiable {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.top, 10)
-            Text(card.text)//populate items with data model each element
+            Text(card.artist)//populate items with data model each element
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
@@ -32,7 +31,7 @@ struct HearthStoneCardView: View, Identifiable {
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(hsCarouselLVM.backgroundColor(forType: card.type)))
+        .background(LinearGradient(gradient: hsCarouselLVM.backgroundColor(forType: card.type), startPoint: .top, endPoint: .bottom))
         .cornerRadius(18)
     }
 }
