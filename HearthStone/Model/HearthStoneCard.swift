@@ -81,6 +81,7 @@ struct HearthStoneCard: Codable {
         return URL(string: urlString)!
     }
     var offSet: CGFloat = 0
+    var cardColor: Color
 }
 
 

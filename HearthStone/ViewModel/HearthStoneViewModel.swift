@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-class HearthStoneCarouselViewModel: ObservableObject {
+class HearthStoneViewModel: ObservableObject {
     
     @Published var hsCards: [HearthStoneCard] = []
+    @Published var featuredCards: [Card] = []
     @Published var swipedCard = 0
     @Published private var cardSearch: String = ""
-    @Published var cards: [Card] = []
+    //@Published var HShomeView Featured 10 cards random?
     
+    @Published var showCard = false
+    @Published var selectedCard = HearthStoneCard(from: .clear)
     
     var count: Int {
         return hsCards.count
@@ -71,11 +74,9 @@ class HearthStoneCarouselViewModel: ObservableObject {
             switch result {
             case .success(let hearthStoneCardData):
                 DispatchQueue.main.async {
-                    self.hsCards = hearthStoneCardData
-                    for card in hearthStoneCardData.prefix(10000) {
-                        if card.type == "HERO" {
-                            print("Hero name: \(card.set) ", "card id: \(card.id)")
-                        }
+                    //self.hsCards = hearthStoneCardData
+                    for card in hearthStoneCardData.prefix(1000) {
+                        print("Hero name: \(card.cost) ", "card id: \(card.id)")
                     }
                 }
             case .failure(let apiError):
