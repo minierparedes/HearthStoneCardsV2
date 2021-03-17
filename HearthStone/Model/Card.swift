@@ -9,8 +9,9 @@ import SwiftUI
 
 
 struct Card:Identifiable, Equatable {
-    var id = UUID().uuidString
+    var cardID = UUID().uuidString
     var offSet: CGFloat = 0
+    var cardColor: Color
     let artist : String
     let attack : Int
     let cardClass : String
@@ -29,5 +30,5 @@ struct Card:Identifiable, Equatable {
     let set : String
     let text : String
     let type : String
-    let img: URL
+    var img: URL?
 }

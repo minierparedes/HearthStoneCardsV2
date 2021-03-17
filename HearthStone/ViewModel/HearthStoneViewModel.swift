@@ -16,7 +16,8 @@ class HearthStoneViewModel: ObservableObject {
     //@Published var HShomeView Featured 10 cards random?
     
     @Published var showCard = false
-    @Published var selectedCard = HearthStoneCard(from: .clear)
+    @Published var selectedCard = Card(cardColor: .clear, artist: "", attack: 0, cardClass: "", collectible: false, cost: 0, dbfId: 0, faction: "", flavor: "", health: 0, id: "", mechanics: [""], name: "", race: "", rarity: "", referencedTags: [""], set: "", text: "", type: "", img: URL(string: ""))
+    @Published var showContent: Bool = false
     
     var count: Int {
         return hsCards.count
@@ -75,8 +76,10 @@ class HearthStoneViewModel: ObservableObject {
             case .success(let hearthStoneCardData):
                 DispatchQueue.main.async {
                     //self.hsCards = hearthStoneCardData
-                    for card in hearthStoneCardData.prefix(1000) {
-                        print("Hero name: \(card.cost) ", "card id: \(card.id)")
+                    for card in hearthStoneCardData.prefix(10) {
+                        print("Hero name: \(card.name) ", "card id: \(card.id)")
+                        self.featuredCards.append(Card(cardColor: .clear, artist: card.artist, attack: card.attack, cardClass: card.cardClass, collectible: card.collectible, cost: card.cost, dbfId: card.dbfId, faction: card.faction, flavor: card.flavor, health: card.health, id: card.id, mechanics: card.mechanics, name: card.name, race: card.race, rarity: card.rarity, referencedTags: card.referencedTags, set: card.set, text: card.text.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil), type: card.type))
+                        print(self.featuredCards)
                     }
                 }
             case .failure(let apiError):

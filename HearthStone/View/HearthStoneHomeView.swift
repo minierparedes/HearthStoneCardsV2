@@ -15,10 +15,10 @@ struct HearthStoneHomeView: View {
     @Namespace var animation
     var body: some View {
         ZStack {
-            VStack{
+            VStack {
                 HStack {
                     Button(action: {
-                        hsCarouselLVM.getJSON()
+                        hearthStoneVM.getJSON()
                     }, label: {
                         Image(systemName: "xmark")
                             .font(.title2)
@@ -58,25 +58,26 @@ struct HearthStoneHomeView: View {
                 .padding(.top, 25)
                 .padding(.horizontal, 30)//based on the func getCardWeight() boxWidth
 
-                Button(action: ResetViews, label: {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .clipShape(Rectangle())
-                        .frame(width: 150)
-                        .background(Color.purple)
-                        .cornerRadius(8)
-                        .shadow(radius: 6)
-                }).padding(.top, 35)
-
                 Spacer()
             }
+            Button(action: ResetViews, label: {
+                Image(systemName: "arrow.left")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding()
+                    .clipShape(Rectangle())
+                    .frame(width: 150)
+                    .background(Color.purple)
+                    .cornerRadius(8)
+                    .shadow(radius: 6)
+            }).padding(.top, 35)
+            
             
             //DetailView
             if hearthStoneVM.showCard {
                 HearthStoneDetailView(animation: animation)
             }
+            Spacer()
         }
     }
 
@@ -111,7 +112,7 @@ struct HearthStoneHomeView: View {
                 hearthStoneVM.featuredCards[index].offSet = -width
                 hearthStoneVM.swipedCard += 1
             } else {
-                hearthStoneVM.hsCards[index].offSet = 0
+                hearthStoneVM.featuredCards[index].offSet = 0
             }
         }
     }

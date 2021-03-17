@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var hsHomeViewModel = HearthStoneCarouselViewModel()
+    @StateObject var hsHomeViewModel = HearthStoneViewModel()
 //    @StateObject var hsCarouselLVM = HearthStoneCarouselViewModel()
 //    @StateObject var hsCarouselLVM = HearthStoneCarouselViewModel()
 //    @State var items = Array(repeating: GridItem(spacing: 15), count: 15)

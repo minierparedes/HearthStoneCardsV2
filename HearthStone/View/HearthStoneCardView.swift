@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HearthStoneCardView: View {
-    @EnvironmentObject var hsCarouselLVM: HearthStoneCarouselViewModel
+    @EnvironmentObject var hearthStoneVM: HearthStoneViewModel
     var card: Card
     var animation: Namespace.ID
     
@@ -20,6 +20,7 @@ struct HearthStoneCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.top, 10)
+                .matchedGeometryEffect(id: "Cost-\(card.id)", in: animation)
             Image(systemName: "photo")
             HStack {
                 Text(card.name)//populate items with data model each element
@@ -28,6 +29,7 @@ struct HearthStoneCardView: View {
                     .foregroundColor(.white)
                     .frame(width: 250, alignment: .leading)
                     .padding()
+                    .matchedGeometryEffect(id: "Name-\(card.id)", in: animation)
                 Spacer(minLength: 0)
             }
             Text(card.text)
@@ -53,14 +55,19 @@ struct HearthStoneCardView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(LinearGradient(gradient: hsCarouselLVM.backgroundColor(forType: card.type), startPoint: .top, endPoint: .bottom).cornerRadius(25).matchedGeometryEffect(id: "bgColor-\(card.id)", in: animation))
+        .background(LinearGradient(gradient: hearthStoneVM.backgroundColor(forType: card.type), startPoint: .top, endPoint: .bottom).cornerRadius(25).matchedGeometryEffect(id: "bgColor-\(card.id)", in: animation))
         .onTapGesture {
             withAnimation(.spring()) {
-                $hsCarouselLVM.selectedCard = card
-                hsCarouselLVM.showCard.toggle()
+                hearthStoneVM.selectedCard = card
+                hearthStoneVM.showCard.toggle()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    withAnimation(.easeIn) {
+                        hearthStoneVM.showContent = true
+                    }
+                }
             }
         }
-        .cornerRadius(18)
     }
 }
 
