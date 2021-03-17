@@ -19,16 +19,16 @@ struct HearthStoneDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.top, 10)
-                .matchedGeometryEffect(id: "Cost-\(hearthStoneVM.selectedCard.id)", in: animation)
-            Image(systemName: "photo")
+                .matchedGeometryEffect(id: "Cost-\(hearthStoneVM.selectedCard.cardID)", in: animation)
             HStack {
-                Text(hearthStoneVM.selectedCard.name)//populate items with data model each element
+                Text(hearthStoneVM.selectedCard.name)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(width: 250, alignment: .leading)
                     .padding()
-                    .matchedGeometryEffect(id: "Name-\(hearthStoneVM.selectedCard.id)", in: animation)
+                    .matchedGeometryEffect(id: "Name-\(hearthStoneVM.selectedCard.cardID)", in: animation)
+                
                 Spacer(minLength: 0)
             }
             
@@ -39,14 +39,15 @@ struct HearthStoneDetailView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .padding()
+                    .animation(.easeIn)
             }
-            
+            //hearthStoneVM.selectedCard.cardColor
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(hearthStoneVM.selectedCard.cardColor
+        .background(LinearGradient(gradient: hearthStoneVM.backgroundColor(forType: hearthStoneVM.selectedCard.type), startPoint: .top, endPoint: .bottom)
                         .cornerRadius(25)
-                        .matchedGeometryEffect(id: "bgColor-\(hearthStoneVM.selectedCard.id)", in: animation)
+                        .matchedGeometryEffect(id: "bgColor-\(hearthStoneVM.selectedCard.cardID)", in: animation)
                         .ignoresSafeArea(.all, edges: .bottom)).onTapGesture {
                             withAnimation(.spring()) {
                                 hearthStoneVM.showCard.toggle()

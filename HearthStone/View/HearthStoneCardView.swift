@@ -14,48 +14,42 @@ struct HearthStoneCardView: View {
     
     var body: some View {
         VStack {
+            
             Text("\(card.cost)")
                 .font(.caption)
                 .foregroundColor(Color.white.opacity(0.85))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.top, 10)
-                .matchedGeometryEffect(id: "Cost-\(card.id)", in: animation)
-            Image(systemName: "photo")
+                .matchedGeometryEffect(id: "Cost-\(card.cardID)", in: animation)
+            
             HStack {
-                Text(card.name)//populate items with data model each element
+                Text(card.name)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(width: 250, alignment: .leading)
                     .padding()
-                    .matchedGeometryEffect(id: "Name-\(card.id)", in: animation)
+                    .matchedGeometryEffect(id: "Name-\(card.cardID)", in: animation)
                 Spacer(minLength: 0)
             }
-            Text(card.text)
-                .foregroundColor(Color.white.opacity(0.85))
             
             Spacer(minLength: 0)
             
             HStack {
                 Spacer(minLength: 0)
-                Text("\(card.health)")
-                    .foregroundColor(Color.white.opacity(0.85))
-               
-            }.padding(30)
-           
-            Text("\(card.attack)")
-                .foregroundColor(Color.white.opacity(0.85))
-            Text("\(card.health)")
-                .foregroundColor(Color.white.opacity(0.85))
                 
-            
-            
-            
-            
+                if !hearthStoneVM.showContent {
+                    Text("Hello world")
+                    //Image(systemName: "photo")
+                }
+               
+            }
+            .foregroundColor(Color.white.opacity(0.9))
+            .padding(30)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(LinearGradient(gradient: hearthStoneVM.backgroundColor(forType: card.type), startPoint: .top, endPoint: .bottom).cornerRadius(25).matchedGeometryEffect(id: "bgColor-\(card.id)", in: animation))
+        .background(LinearGradient(gradient: hearthStoneVM.backgroundColor(forType: card.type), startPoint: .top, endPoint: .bottom).cornerRadius(25).matchedGeometryEffect(id: "bgColor-\(card.cardID)", in: animation))
         .onTapGesture {
             withAnimation(.spring()) {
                 hearthStoneVM.selectedCard = card
