@@ -50,22 +50,16 @@ struct HearthStoneDetailView: View {
                             .cornerRadius(25)
                             .matchedGeometryEffect(id: "bgColor-\(hearthStoneVM.selectedCard.cardID)", in: animation)
                             .ignoresSafeArea(.all, edges: .bottom))
-            //close button
-            VStack {
-                Spacer()
-                
-                Button
-//                    .onTapGesture {
-//                        withAnimation(.spring()) {
-//                            hearthStoneVM.showCard.toggle()
-//                            
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//                                withAnimation(.easeIn) {
-//                                    hearthStoneVM.showContent = false
-//                                }
-//                            }
-//                        }
-//                    }
+            .onTapGesture {
+                withAnimation(.spring()) {
+                    hearthStoneVM.showCard.toggle()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        withAnimation(.easeIn) {
+                            hearthStoneVM.showContent = false
+                        }
+                    }
+                }
             }
         }
     }
