@@ -14,6 +14,7 @@ struct HearthStoneHomeView: View {
     @EnvironmentObject var hearthStoneVM: HearthStoneViewModel
     @Namespace var animation
     var body: some View {
+        
         ZStack {
             VStack {
                 HStack {
