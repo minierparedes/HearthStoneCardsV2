@@ -80,8 +80,6 @@ struct HearthStoneCard: Codable {
         let urlString = "https://art.hearthstonejson.com/v1/256x/\(id).jpg"
         return URL(string: urlString)!
     }
-//    var offSet: CGFloat = 0
-//    var cardColor: Color
 }
 
 

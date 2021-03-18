@@ -10,9 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var hsHomeViewModel = HearthStoneViewModel()
     var body: some View {
-       HearthStoneHomeView()
-        //using it as an environment object
-        .environmentObject(hsHomeViewModel)
+            HearthStoneHomeView()
+            //using it as an environment object
+            .environmentObject(hsHomeViewModel)
     }
 }
 
