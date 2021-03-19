@@ -109,6 +109,7 @@ struct HearthStoneHomeView: View {
                                 
                             })
                             .padding(.top, 35)
+                            .padding(.bottom, 40)
                             Spacer()
                         }
                         
@@ -118,10 +119,11 @@ struct HearthStoneHomeView: View {
                         }
                     }
                     
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20) count: 2), spacing: 25) {
-                        
-                        ForEach(hearthStoneVM.hsCards) {card in
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: -20), count: 2), spacing: 25) {
+
+                        ForEach(hearthStoneVM.featuredCards) {card in
                             //Card View
+                            HearthStoneLazyGridCardView(card: card, animation: animation)
                         }
                     }
                 }

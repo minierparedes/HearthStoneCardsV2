@@ -75,11 +75,6 @@ struct HearthStoneCard: Codable {
             text = try values.decodeIfPresent(String.self, forKey: .text) ?? ""
             type = try values.decodeIfPresent(String.self, forKey: .type) ?? ""
     }
-
-    var cardImageURL: URL {
-        let urlString = "https://art.hearthstonejson.com/v1/256x/\(id).jpg"
-        return URL(string: urlString)!
-    }
 }
 
 

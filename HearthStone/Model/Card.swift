@@ -30,5 +30,4 @@ struct Card:Identifiable, Equatable {
     let set : String
     let text : String
     let type : String
-    var img: URL?
 }

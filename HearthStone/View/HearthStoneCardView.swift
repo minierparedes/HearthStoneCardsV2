@@ -4,7 +4,7 @@
 //
 //  Created by ethancr0wn on 2021/03/09.
 //
-
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct HearthStoneCardView: View {
