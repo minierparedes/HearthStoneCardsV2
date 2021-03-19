@@ -11,105 +11,118 @@ import SwiftUI
 var width = UIScreen.main.bounds.width
 
 struct HearthStoneHomeView: View {
+    
     @EnvironmentObject var hearthStoneVM: HearthStoneViewModel
     @Namespace var animation
     @State var selected = categoryTabs[0]
     @Namespace var tabAnimation
-    var categoryTabs = ["Featured", "Cards", "Card Sets", "Heros", "Battlegrounds"]
+    
     var body: some View {
         
         VStack {
+            Spacer()
+            
+            VStack {
+                HStack {
+                    VStack(alignment: .leading, spacing: 5) {
+                        
+                        Text("HearthStone")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .foregroundColor(.yellow)
+                    }
+                    .padding(.horizontal)
+                    Spacer(minLength: 0)
+                }
+            }
+            
+            HStack(spacing: 0) {
+                ForEach(categoryTabs, id: \.self) {tab in
+                    //Tab button
+                    TabButtonView(title: tab, selected: $selected, tabAnimation: tabAnimation)
+                    
+                    //even spacing
+                    
+                    if categoryTabs.last != tab{Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)}
+                }
+            }
+            .padding()
+            .padding(.top, 5)
+            
             ScrollView {
                 
                 VStack {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
+                    ZStack {
+                        VStack {
+                            HStack {
+                                Button(action: {
+                                    hearthStoneVM.getJSON()
+                                }, label: {
+                                    Image(systemName: "xmark")
+                                        .font(.title2)
+                                        .foregroundColor(.gray)
+                                })
+                                Text("Featured")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                                    .padding(.leading)
+                                
+                                Spacer()
+                            }
+                            .padding()
                             
-                            Text("HearthStone")
-                                .font(.largeTitle)
-                                .fontWeight(.heavy)
-                                .foregroundColor(.yellow)
-                        }
-                        .padding(.horizontal)
-                        Spacer(minLength: 0)
-                    }
-                }
-                
-                HStack(spacing: 0) {
-                    ForEach(categoryTabs, id: \.self) {tab in
-                        //Tab button
-                        TabButtonView(title: tab, selected: $selected, animation: animation)
-                        
-                        //even spacing
-                        
-                        if categoryTabs.last != tab{Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)}
-                    }
-                }
-                .padding()
-                
-                ZStack {
-                    VStack {
-                        HStack {
-                            Button(action: {
-                                hearthStoneVM.getJSON()
-                            }, label: {
-                                Image(systemName: "xmark")
-                                    .font(.title2)
-                                    .foregroundColor(.gray)
+                            //Carousel
+                            ZStack {
+                                ForEach(hearthStoneVM.featuredCards.indices.prefix(11).reversed(), id: \.self) {index in
+                                    HStack {
+                                        HearthStoneCardView(card: hearthStoneVM.featuredCards[index], animation: animation)
+                                            .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))
+                                            .offset(x: getCardOffSet(index: index))
+                                            .rotationEffect(.init(degrees: getCardRotation(index: index)))
+                                        
+                                        Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
+                                    }
+                                    .frame(height: 460)
+                                    .contentShape(Rectangle())
+                                    .offset(x: hearthStoneVM.featuredCards[index].offSet)
+                                    .gesture(DragGesture(minimumDistance: 0).onChanged({(value) in
+                                        dragGestureOnChange(value: value, index: index)
+                                    }).onEnded({(value) in
+                                        dragGestureOnEnd(value: value, index: index)
+                                    }))
+                                    
+                                }
+                            }
+                            .padding(.top, 25)
+                            .padding(.horizontal, 30)//based on the func getCardWeight() boxWidth
+                            
+                            Button(action: ResetViews, label: {
+                                Image(systemName: "arrow.left")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(width: 90, height: 35)
+                                    .background(Color.purple)
+                                    .clipShape(Rectangle())
+                                    .cornerRadius(8)
+                                    .shadow(radius: 6)
+                                
                             })
-                            Text("Featured")
-                                .fontWeight(.bold)
-                                .foregroundColor(.black)
-                                .padding(.leading)
-                            
+                            .padding(.top, 35)
                             Spacer()
                         }
-                        .padding()
                         
-                        //Carousel
-                        ZStack {
-                            ForEach(hearthStoneVM.featuredCards.indices.prefix(11).reversed(), id: \.self) {index in
-                                HStack {
-                                    HearthStoneCardView(card: hearthStoneVM.featuredCards[index], animation: animation)
-                                        .frame(width: getCardWidth(index: index), height:getCardHeight(index: index))
-                                        .offset(x: getCardOffSet(index: index))
-                                        .rotationEffect(.init(degrees: getCardRotation(index: index)))
-                                    
-                                    Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
-                                }
-                                .frame(height: 460)
-                                .contentShape(Rectangle())
-                                .offset(x: hearthStoneVM.featuredCards[index].offSet)
-                                .gesture(DragGesture(minimumDistance: 0).onChanged({(value) in
-                                    dragGestureOnChange(value: value, index: index)
-                                }).onEnded({(value) in
-                                    dragGestureOnEnd(value: value, index: index)
-                                }))
-                                
-                            }
+                        //DetailView
+                        if hearthStoneVM.showCard {
+                            HearthStoneDetailView(animation: animation)
                         }
-                        .padding(.top, 25)
-                        .padding(.horizontal, 30)//based on the func getCardWeight() boxWidth
-                        
-                        Button(action: ResetViews, label: {
-                            Image(systemName: "arrow.left")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(width: 90, height: 35)
-                                .background(Color.purple)
-                                .clipShape(Rectangle())
-                                .cornerRadius(8)
-                                .shadow(radius: 6)
-                            
-                        })
-                        .padding(.top, 35)
-                        Spacer()
                     }
                     
-                    //DetailView
-                    if hearthStoneVM.showCard {
-                        HearthStoneDetailView(animation: animation)
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20) count: 2), spacing: 25) {
+                        
+                        ForEach(hearthStoneVM.hsCards) {card in
+                            //Card View
+                        }
                     }
                 }
                 
@@ -120,6 +133,8 @@ struct HearthStoneHomeView: View {
             Spacer(minLength: 0)
         }
     }
+    
+    
     
     //Reset Views
     func ResetViews() {
@@ -176,6 +191,9 @@ struct HearthStoneHomeView: View {
         return index - hearthStoneVM.swipedCard <= 2 ? CGFloat(index - hearthStoneVM.swipedCard) * 30 : 60
     }
 }
+
+var categoryTabs = ["Featured", "Heros", "Cards", "Card Sets"]
+
 
 struct HearthStoneHomeView_Previews: PreviewProvider {
     static var previews: some View {

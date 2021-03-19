@@ -10,6 +10,7 @@
 		8D5C679125FF344000C4C6AD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C679025FF344000C4C6AD /* ColorExtension.swift */; };
 		8D5C67952600548100C4C6AD /* HearthStoneDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C67942600548000C4C6AD /* HearthStoneDetailView.swift */; };
 		8D808D0B2603217800D38F01 /* TabButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D808D0A2603217800D38F01 /* TabButtonView.swift */; };
+		8D808D0E2604861900D38F01 /* HearthStoneLazyGridCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D808D0D2604861900D38F01 /* HearthStoneLazyGridCardView.swift */; };
 		8DEEE88125F718F8008AF8DF /* HearthStoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE88025F718F8008AF8DF /* HearthStoneApp.swift */; };
 		8DEEE88325F718F8008AF8DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEEE88225F718F8008AF8DF /* ContentView.swift */; };
 		8DEEE88525F718FA008AF8DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEEE88425F718FA008AF8DF /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		8D5C679025FF344000C4C6AD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		8D5C67942600548000C4C6AD /* HearthStoneDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneDetailView.swift; sourceTree = "<group>"; };
 		8D808D0A2603217800D38F01 /* TabButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonView.swift; sourceTree = "<group>"; };
+		8D808D0D2604861900D38F01 /* HearthStoneLazyGridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneLazyGridCardView.swift; sourceTree = "<group>"; };
 		8DEEE87D25F718F8008AF8DF /* HearthStone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearthStone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DEEE88025F718F8008AF8DF /* HearthStoneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearthStoneApp.swift; sourceTree = "<group>"; };
 		8DEEE88225F718F8008AF8DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				8DEEE8AB25F75D80008AF8DF /* HearthStoneHomeView.swift */,
+				8D808D0D2604861900D38F01 /* HearthStoneLazyGridCardView.swift */,
 				8D808D0A2603217800D38F01 /* TabButtonView.swift */,
 				8D5C67942600548000C4C6AD /* HearthStoneDetailView.swift */,
 				8DEEE8BD25F7C11A008AF8DF /* HearthStoneCardView.swift */,
@@ -213,6 +216,7 @@
 				8DEEE89125F71951008AF8DF /* APIService.swift in Sources */,
 				8D808D0B2603217800D38F01 /* TabButtonView.swift in Sources */,
 				8DEEE8B425F7622B008AF8DF /* HearthStoneViewModel.swift in Sources */,
+				8D808D0E2604861900D38F01 /* HearthStoneLazyGridCardView.swift in Sources */,
 				8D5C67952600548100C4C6AD /* HearthStoneDetailView.swift in Sources */,
 				8DEEE88125F718F8008AF8DF /* HearthStoneApp.swift in Sources */,
 				8DEEE89425F7199D008AF8DF /* HearthStoneCard.swift in Sources */,
