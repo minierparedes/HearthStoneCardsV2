@@ -8,13 +8,38 @@
 import SwiftUI
 
 struct HearthStoneLazyGridDetailCardView: View {
+    @EnvironmentObject var hearthStoneVM: HearthStoneViewModel
+    @Binding var selectedCard: HearthStoneViewModel
+    
+    var animation: Namespace.ID
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                
+                Button(action: {
+                    //close view
+                    withAnimation(.spring()){hearthStoneVM.showCard.toggle()}
+                }) {
+                    Image(systemName: "chevron.left")
+                        .font(.title)
+                        .foregroundColor(.black)
+                }
+                
+                Spacer()
+            }
+            
+            Image(systemName: "photo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding()
+            
+            Spacer()
+        }
     }
 }
 
 struct HearthStoneLazyGridDetailCardView_Previews: PreviewProvider {
     static var previews: some View {
-        HearthStoneLazyGridDetailCardView()
+        ContentView()
     }
 }

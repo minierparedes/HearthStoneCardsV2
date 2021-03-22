@@ -14,12 +14,6 @@ class HearthStoneViewModel: ObservableObject {
     @Published var swipedCard = 0
     @Published private var cardSearch: String = ""
     //@Published var HShomeView Featured 10 cards random?
-    
-    
-    
-    
-    
-    
     @Published var showCard = false
     @Published var selectedCard = Card(cardColor: .clear, artist: "", attack: 0, cardClass: "", collectible: false, cost: 0, dbfId: 0, faction: "", flavor: "", health: 0, id: "", mechanics: [""], name: "", race: "", rarity: "", referencedTags: [""], set: "", text: "", type: "")
     @Published var showContent: Bool = false

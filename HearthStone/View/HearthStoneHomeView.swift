@@ -16,6 +16,7 @@ struct HearthStoneHomeView: View {
     @Namespace var animation
     @State var selected = categoryTabs[0]
     @Namespace var tabAnimation
+    @State var selectedCard: Card = featuredCards[0]
     
     var body: some View {
         
@@ -124,11 +125,22 @@ struct HearthStoneHomeView: View {
                         ForEach(hearthStoneVM.featuredCards) {card in
                             //Card View
                             HearthStoneLazyGridCardView(card: card, animation: animation)
+                                .onTapGesture {
+                                    withAnimation(.spring()) {
+                                        selectedCard = card
+                                        hearthStoneVM.showCard.toggle()
+                                    }
+                                }
                         }
                     }
                 }
                 
                 
+            }
+            .opacity(hearthStoneVM.showCard ? 0 : 1)
+            
+            if hearthStoneVM.showCard {
+                HearthStoneLazyGridDetailCardView(selectedCard: $selectedCard, animation: animation)
             }
             
             
