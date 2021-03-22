@@ -15,23 +15,26 @@ struct HearthStoneLazyGridCardView: View {
     var body: some View {
         VStack {
             HStack {
-                Spacer(minLength: 0)
+                
                 
                 Text("\(card.cost)")
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
-                    .padding(.vertical, 5)
+                    .padding(.vertical, 8)
                     .padding(.horizontal, 10)
                     .background(Color.white.opacity(0.6))
                     .cornerRadius(10)
+                Spacer(minLength: 0)
                 
             }
             
             WebImage(url: URL(string: "https://art.hearthstonejson.com/v1/256x/\(card.id).jpg"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-//                .frame(width: 50, height: 50)
-                .padding()
+                .frame(width: 50, height: 50)
+                .padding(.top, 30)
+                .padding(.bottom)
+                .padding(.horizontal, 10)
             
             Text(card.name)
                 .font(.title2)
@@ -48,9 +51,10 @@ struct HearthStoneLazyGridCardView: View {
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
                 
-            }
+            }.padding()
+            
         }
-        .padding(.bottom)
+//        .padding(.bottom)
         .background(LinearGradient(gradient: hearthStoneVM.backgroundColor(forType: card.type), startPoint: .top, endPoint: .bottom))
         .cornerRadius(15)
         .frame(width:180)
