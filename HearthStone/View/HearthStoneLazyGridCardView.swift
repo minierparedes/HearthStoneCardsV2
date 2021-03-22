@@ -27,7 +27,7 @@ struct HearthStoneLazyGridCardView: View {
                 
             }
             
-            Image(systemName: "photo")
+            WebImage(url: URL(string: "https://art.hearthstonejson.com/v1/256x/\(card.id).jpg"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
 //                .frame(width: 50, height: 50)

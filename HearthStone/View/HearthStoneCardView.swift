@@ -41,7 +41,7 @@ struct HearthStoneCardView: View {
                 
                 if !hearthStoneVM.showContent {
                     Text("Hello world")
-                    //Image(systemName: "photo")
+                    WebImage(url: URL(string: "https://art.hearthstonejson.com/v1/256x/\(card.id).jpg"))
                 }
                
             }

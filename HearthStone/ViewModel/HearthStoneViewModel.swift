@@ -15,28 +15,25 @@ class HearthStoneViewModel: ObservableObject {
     @Published private var cardSearch: String = ""
     //@Published var HShomeView Featured 10 cards random?
     
+    
+    
+    
+    
+    
     @Published var showCard = false
-    @Published var selectedCard = Card(cardColor: .clear, artist: "", attack: 0, cardClass: "", collectible: false, cost: 0, dbfId: 0, faction: "", flavor: "", health: 0, id: "", mechanics: [""], name: "", race: "", rarity: "", referencedTags: [""], set: "", text: "", type: "", img: URL(string: ""))
+    @Published var selectedCard = Card(cardColor: .clear, artist: "", attack: 0, cardClass: "", collectible: false, cost: 0, dbfId: 0, faction: "", flavor: "", health: 0, id: "", mechanics: [""], name: "", race: "", rarity: "", referencedTags: [""], set: "", text: "", type: "")
     @Published var showContent: Bool = false
     
-    var count: Int {
-        return hsCards.count
-    }
-    
-    func position(of hsCard: HearthStoneCard) -> Int {
-        
-        return hsCards.firstIndex(where: {$0.id == hsCard.id}) ?? 0
-    }
-    
-    func deckOffset(of hsCard: HearthStoneCard) -> CGFloat {
-        let deckPosition = position(of: hsCard)
-        let offset = deckPosition * -10
-        return CGFloat(offset)
-    }
+//    var cardImageURL: URL {
+//        let urlString = "https://art.hearthstonejson.com/v1/256x/\(featuredCards[0].id).jpg"
+//        return URL(string: urlString)!
+//    }
     
     func gradientColors(forType type1: String, forType type2: String) -> LinearGradient {
        return LinearGradient(gradient: Gradient(colors: [Color("\(type1)"), Color("\(type2)")]), startPoint: .top, endPoint: .bottom)
     }
+    
+   
 
     func backgroundColor(forType type: String) -> Gradient {
         let deathKnightGradientColor = Gradient(colors: [Color.cardClassDeathKnightDark, Color.cardClassDeathKnightLight])
@@ -75,12 +72,13 @@ class HearthStoneViewModel: ObservableObject {
             switch result {
             case .success(let hearthStoneCardData):
                 DispatchQueue.main.async {
-                    //self.hsCards = hearthStoneCardData
-                    for card in hearthStoneCardData.prefix(10) {
-                        print("Hero name: \(card.name) ", "card id: \(card.id)")
+                    self.hsCards = hearthStoneCardData
+                    for (index, card) in hearthStoneCardData.enumerated().prefix(10) {
+                       // print("Hero name: \(card.name) ", "card id: \(card.id)")
                         self.featuredCards.append(Card(cardColor: .clear, artist: card.artist, attack: card.attack, cardClass: card.cardClass, collectible: card.collectible, cost: card.cost, dbfId: card.dbfId, faction: card.faction, flavor: card.flavor, health: card.health, id: card.id, mechanics: card.mechanics, name: card.name, race: card.race, rarity: card.rarity, referencedTags: card.referencedTags, set: card.set, text: card.text.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil), type: card.type))
-                        print(self.featuredCards)
+                        print(self.featuredCards[index].id)
                     }
+                    
                 }
             case .failure(let apiError):
                 switch apiError {
